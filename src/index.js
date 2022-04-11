@@ -9,10 +9,15 @@ import 'antd/dist/antd.css'
 import 'antd/dist/antd.min.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+// 全局注册store
+import { Provider } from 'react-redux'
+import store from './store'
 
 createRoot(document.querySelector('#root')).render(
   // 开启 react 严格模式，会帮助检测不合理的代码，但是不是必须要开启
-  <App />
+  <Provider store={store}>
+    <App />
+  </Provider>
 )
 
 // If you want to start measuring performance in your app, pass a function

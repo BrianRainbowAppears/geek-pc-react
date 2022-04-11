@@ -7,6 +7,9 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Login from '@/pages/Login'
 import Layout from '@/pages/Layout'
 import NotFound from './pages/NotFound'
+// 导入路由鉴权组件
+import AuthRoute from './components/auth'
+import Test from './pages/Test'
 
 function App() {
   return (
@@ -15,9 +18,18 @@ function App() {
       <div className="app">
         <Switch>
           {/* 能够打开页面(重定向只需输入'/'就能跳转)就展示首页内容， */}
-          <Redirect exact from='/' to='/home'></Redirect>
-          <Route path="/home" component={Layout}></Route>
+          <Redirect exact from="/" to="/home"></Redirect>
+          {/* <Route path="/home" component={Layout}></Route> */}
+          {/* 封装AuthRoute组件
+              1. 可以配置路由
+              2. 组件内部要接受传入的参数
+          */}
+          <AuthRoute abc="1" path="/home" component={Layout}></AuthRoute>
+          {/* <Route path="/test" component={Test}></Route> */}
+          <AuthRoute path="/test" component={Test}></AuthRoute>
+
           <Route path="/login" component={Login}></Route>
+
           <Route component={NotFound}></Route>
         </Switch>
       </div>
