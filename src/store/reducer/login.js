@@ -10,6 +10,10 @@ export function loginReducer(state = initState, action) {
     // 因为传入的token为字符串，自己定义的初始initState也是空字符串，所以直接return即可
     return action.token
   }
+  // 退出登录
+  if (action.type === 'clear/login') {
+    return ''
+  }
   return state
 }
 

@@ -19,7 +19,9 @@ const Login = () => {
     // try..catch捕获 token获取失败的情况的error
     try {
       await dispatch(getTokenAction(formData))
-      history.push(location.state.from || '/home')
+      // 绝对不能在这打印location.state.from，因为state有可能出现undefined
+      // console.log(location.state.from);
+      history.push(location.state?.from || '/home')
     } catch (error) {
       console.dir(error)
       console.log(error.response.data.message)

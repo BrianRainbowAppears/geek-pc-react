@@ -1,0 +1,43 @@
+.root {
+  height: 100%;
+
+  :global {
+    // 布局高度自适应（覆盖组件库样式）
+    .ant-layout {
+      height: 100%;
+    }
+
+    .header {
+      padding: 0;
+    }
+
+    .logo {
+      width: 200px;
+      height: 60px;
+      background: url(../../assets/logo.png) no-repeat center / 160px auto;
+    }
+
+    // 控制右侧内容区域可滚动
+    .layout-content {
+      overflow-y: auto;
+    }
+
+    // 用户信息
+    .user-info {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding-right: 20px;
+      color: #fff;
+
+      .user-name {
+        margin-right: 20px;
+      }
+
+      .user-logout {
+        display: inline-block;
+        cursor: pointer;
+      }
+    }
+  }
+}

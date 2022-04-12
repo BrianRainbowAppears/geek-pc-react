@@ -7,6 +7,7 @@ import 'antd/dist/antd.css'
 // 自己编写的全局样式，有需要可以覆盖组件样式
 // import './index.scss'
 import 'antd/dist/antd.min.css'
+import '@/index.scss'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 // 全局注册store

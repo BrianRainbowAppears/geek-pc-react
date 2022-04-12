@@ -10,11 +10,13 @@ import NotFound from './pages/NotFound'
 // 导入路由鉴权组件
 import AuthRoute from './components/auth'
 import Test from './pages/Test'
+import customHistory from './utils/history'
+import { Router } from 'react-router-dom'
 
 function App() {
   return (
     // 路由 history模式
-    <BrowserRouter>
+    <Router history={customHistory}>
       <div className="app">
         <Switch>
           {/* 能够打开页面(重定向只需输入'/'就能跳转)就展示首页内容， */}
@@ -33,7 +35,7 @@ function App() {
           <Route component={NotFound}></Route>
         </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   )
 }
 
