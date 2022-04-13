@@ -23,6 +23,7 @@ function LayoutGeek() {
   const history = useHistory()
   console.log(location);
   const path = location.pathname
+  console.log(path);
   // 调接口拿取用户信息
   const dispatch = useDispatch()
   // 使用useEffect钩子，只掉一次接口

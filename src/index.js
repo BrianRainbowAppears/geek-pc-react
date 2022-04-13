@@ -13,11 +13,18 @@ import reportWebVitals from './reportWebVitals'
 // 全局注册store
 import { Provider } from 'react-redux'
 import store from './store'
+// 全局国际化配置
+import { ConfigProvider } from 'antd'
+// 中文语言包
+import 'moment/locale/zh-cn'
+import zhCN from 'antd/lib/locale/zh_CN'
 
 createRoot(document.querySelector('#root')).render(
   // 开启 react 严格模式，会帮助检测不合理的代码，但是不是必须要开启
   <Provider store={store}>
-    <App />
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
   </Provider>
 )
 
