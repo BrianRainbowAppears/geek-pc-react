@@ -1,0 +1,26 @@
+.root {
+  position: relative;
+ 	
+  :global {
+    // 定义全局样式
+    // 1. 覆盖组件库样式
+    // 上传组件
+    .ant-upload-list {
+      .ant-upload-list-picture-card-container,
+      .ant-upload-select {
+        width: 146px;
+        height: 146px;
+      }
+    }  
+
+    // 2. 定义自己的样式
+    // 设置富文本编辑器高度
+    .publish-quill {
+      // 高度的修改需要放到editor编辑框下
+      .ql-editor {
+        height: 300px;
+      }
+    }
+
+  }
+}

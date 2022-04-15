@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {getUserInfo} from '@/store/action/user'
+import { getUserInfo } from '@/store/action/user'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
@@ -21,9 +21,10 @@ function LayoutGeek() {
   // 实现选中高亮，刷新依旧
   const location = useLocation()
   const history = useHistory()
-  console.log(location);
-  const path = location.pathname
-  console.log(path);
+  console.log(location)
+  // const path = location.pathname
+  const path = location.pathname.startsWith('/home/publish') ? '/home/publish' : location.pathname
+  console.log(path)
   // 调接口拿取用户信息
   const dispatch = useDispatch()
   // 使用useEffect钩子，只掉一次接口
@@ -40,7 +41,7 @@ function LayoutGeek() {
     // 2. 跳回登录页
     history.push('/login')
   }
-  
+
   return (
     <Layout className={styles.root}>
       <Header className="header">
@@ -58,15 +59,21 @@ function LayoutGeek() {
       <Layout>
         <Sider width={200} className="site-layout-background">
           {/* 菜单 */}
-          <Menu mode="inline" theme="dark" defaultSelectedKeys={[path]} style={{ height: '100%', borderRight: 0 }}>
+          <Menu
+            mode="inline"
+            theme="dark"
+            // defaultSelectedKeys={[path]}
+            selectedKeys={[path]}
+            style={{ height: '100%', borderRight: 0 }}
+          >
             <Menu.Item icon={<HomeOutlined />} key="/home">
-              <Link to='/home'>数据概览</Link>
+              <Link to="/home">数据概览</Link>
             </Menu.Item>
             <Menu.Item icon={<DiffOutlined />} key="/home/article">
-              <Link to='/home/article'>内容管理</Link>
+              <Link to="/home/article">内容管理</Link>
             </Menu.Item>
             <Menu.Item icon={<EditOutlined />} key="/home/publish">
-              <Link to='/home/publish'>发布文章</Link>
+              <Link to="/home/publish">发布文章</Link>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -78,7 +85,7 @@ function LayoutGeek() {
           {/* 内容管理  */}
           <Route path="/home/article" component={Article}></Route>
           {/* 发布文章  */}
-          <Route path="/home/publish" component={Publish}></Route>
+          <Route path="/home/publish/:articleId?" component={Publish}></Route>
         </Layout>
       </Layout>
     </Layout>

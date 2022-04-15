@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Card, Breadcrumb, Form, Button, Radio, DatePicker, Select, Table, Tag, Space, Modal } from 'antd'
+import { Card, Breadcrumb, Form, Button, Radio, DatePicker,  Table, Tag, Space, Modal } from 'antd'
 import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 
 import img404 from '@/assets/error.png'
@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 // 导入Action方法
-import { getChannelAction, getArticleAction, delArticleAction } from '@/store/action/article'
+import {  getArticleAction, delArticleAction } from '@/store/action/article'
 // 局部国际化，较为局限，推荐使用全局国际化配置
 // import 'moment/locale/zh-cn'
 // import locale from 'antd/es/date-picker/locale/zh_CN'
+// 导入下拉频道选择框组件
+import ChannelSelect from '@/components/channelSelect'
 
-const { Option } = Select
 const { RangePicker } = DatePicker
 // 优化文章状态的处理
 const articleStatus = {
@@ -27,11 +28,10 @@ const Article = () => {
   // dispatch发送Action请求，获取频道列表数据
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getChannelAction())
     dispatch(getArticleAction())
   }, [dispatch])
 
-  const { channels, articles, page, per_page, total_count } = useSelector(state => state.articleReducer)
+  const { articles, page, per_page, total_count } = useSelector(state => state.articleReducer)
   // console.log(channels);
   // 筛选功能
   // 但是由于对于React函数组件来说，只要修改状态，组件就会更新，函数组件中的代码都会重头到尾执行一遍：普通变量、普通函数
@@ -175,19 +175,8 @@ const Article = () => {
           </Form.Item>
 
           <Form.Item label="频道" name="channel_id">
-            <Select
-              placeholder="请选择文章频道"
-              // defaultValue="lucy"
-              style={{ width: 120 }}
-            >
-              {channels.map(item => (
-                <Option key={item.id} value={item.id}>
-                  {item.name}
-                </Option>
-              ))}
-              {/* <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option> */}
-            </Select>
+            {/* 频道下拉选择框 */}
+            <ChannelSelect width={288}></ChannelSelect>
           </Form.Item>
 
           <Form.Item label="日期" name="date">

@@ -35,7 +35,27 @@ export function getArticleAction(params) {
 export function delArticleAction(id, params) {
   return async () => {
     const ret = await request.delete(`/mp/articles/${id}`)
-    console.log(ret);
+    console.log(ret)
     dispatch(getArticleAction(params))
+  }
+}
+// 发布文章
+export function publishArticleAction(data, isDraft) {
+  return async () => {
+    await request.post(`/mp/articles?draft=${isDraft}`, data)
+  }
+}
+// 获取文章详情
+export function getArtDetailAction(id) {
+  return async () => {
+    const {data} = await request.get(`/mp/articles/${id}`)
+    // console.log(data);
+    return data
+  }
+}
+// 编辑文章
+export function editArticleAction(data, isDraft) {
+  return async () => {
+    await request.put(`/mp/articles/${data.id}?draft=${isDraft}`, data)
   }
 }
