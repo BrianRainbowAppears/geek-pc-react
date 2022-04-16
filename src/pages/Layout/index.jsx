@@ -41,6 +41,12 @@ function LayoutGeek() {
     // 2. 跳回登录页
     history.push('/login')
   }
+  // 处理：页面跳转回到顶部 =》 解决页面滚动位置问题
+  // 技术：滚动区域dom元素.scrollTop = 0
+  // 如果加 && 判断当前DOM是否存在，如果左边不存在，右边也不会执行。
+  // &&（逻辑与） ：左边存在，右边才会执行。左边不存在，右边不会执行。可以形象化为 “短路运算”
+  // ||（逻辑或） ：左边存在，就会执行左边。左边不存在，就会执行右边
+  document.querySelector('.layout-content') && (document.querySelector('.layout-content').scrollTop = 0)
 
   return (
     <Layout className={styles.root}>
@@ -85,7 +91,8 @@ function LayoutGeek() {
           {/* 内容管理  */}
           <Route path="/home/article" component={Article}></Route>
           {/* 发布文章  */}
-          <Route path="/home/publish/:articleId?" component={Publish}></Route>
+          {/* key相当于route的唯一标识，所以可以帮助publish组件进行重新渲染 */}
+          <Route key={Date.now()} path="/home/publish/:articleId?" component={Publish}></Route>
         </Layout>
       </Layout>
     </Layout>

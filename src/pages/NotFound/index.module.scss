@@ -1,0 +1,13 @@
+.root{
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20px;
+  text-align: center;
+  background: #191742 url('~@/assets/404.gif') no-repeat center center;
+  :global{
+    h1,
+    p {
+      color: #fff;
+    }
+  }
+}
